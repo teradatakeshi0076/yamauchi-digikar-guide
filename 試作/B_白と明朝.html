@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>試作B</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif;color:#16212b;background:#fff;-webkit-font-smoothing:antialiased}
+.top{height:4px;background:linear-gradient(90deg,#2a9a9c,#2459b0 60%,#1d3c86)}
+.in{width:1180px;margin:0 auto}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:26px 0}
+.brand{display:flex;align-items:center;gap:12px;font-size:15px;letter-spacing:.08em}
+.brand img{height:30px}
+.brand small{color:#7a8590;margin-left:10px;font-size:12px;letter-spacing:.14em}
+.nav{display:flex;gap:28px;font-size:13.5px;color:#55616c}
+.nav b{font-weight:400;border:1px solid #cfd6dc;border-radius:999px;padding:6px 16px}
+.hero{display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:end;padding:64px 0 54px;border-bottom:1px solid #e3e7ea}
+h1{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-weight:400;font-size:52px;line-height:1.35;letter-spacing:.04em}
+.lead{margin-top:18px;font-size:15px;color:#5b6670;line-height:1.9}
+.search{margin-top:40px;display:flex;align-items:center;gap:18px;border-bottom:2px solid #16212b;padding:0 0 16px}
+.search svg{width:28px;height:28px;stroke:#16212b;fill:none;stroke-width:1.8}
+.search span{flex:1;font-size:22px;color:#a3acb4}
+.search i{font-style:normal;font-size:14px;color:#fff;background:#16212b;border-radius:999px;padding:11px 26px}
+.often{margin-top:18px;font-size:14px;color:#7a8590}
+.often b{font-weight:400;color:#1f8f98;margin-left:16px}
+.photo{height:330px;border-radius:4px;background:url(photo/about4.jpg) 18% 40%/cover}
+.cap{font-size:12px;color:#8a949d;margin-top:10px;letter-spacing:.06em}
+h2{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-weight:400;font-size:26px;letter-spacing:.06em;margin:54px 0 24px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #16212b}
+.cell{padding:26px 24px 30px 0;border-bottom:1px solid #e3e7ea}
+.cell+.cell{padding-left:24px;border-left:1px solid #e3e7ea}
+.cell:nth-child(5){padding-left:0;border-left:0}
+.cell h3{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-weight:400;font-size:23px;letter-spacing:.04em}
+.cell p{font-size:13.5px;color:#66717b;margin-top:8px;line-height:1.75;min-height:46px}
+.cell .k{display:inline-block;margin-top:14px;font-size:13px;color:#1f8f98;border-bottom:1px solid #9fd0d2;padding-bottom:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 60px;padding-bottom:70px}
+.two h2{margin-top:56px}
+.q{display:flex;justify-content:space-between;padding:17px 0;border-top:1px solid #e3e7ea;font-size:16px}
+.q:last-child{border-bottom:1px solid #e3e7ea}
+.q span{color:#1f8f98}
+</style></head><body>
+<div class="top"></div>
+<div class="in">
+ <div class="bar"><div class="brand"><img src="../site/logo.png" alt="">デジカル操作ガイド<small>やまうちクリニック</small></div><div class="nav"><span>お気に入り</span><span>最近見た手順</span><b>文字を大きく</b></div></div>
+ <section class="hero">
+  <div>
+   <h1>必要な手順を、<br>迷わず、すぐに。</h1>
+   <p class="lead">デジカル操作マニュアル705ページを、やりたいことから引けるようにしました。</p>
+   <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>やりたいこと・困っていることを入力</span><i>探す</i></div>
+   <p class="often">よく探される言葉<b>受付 取消</b><b>保険証 あとから</b><b>マイナ保険証</b><b>返金</b></p>
+  </div>
+  <div><div class="photo"></div><p class="cap">経堂駅前　やまうちクリニック</p></div>
+ </section>
+ <h2>業務から探す</h2>
+ <div class="grid">
+  <div class="cell"><h3>受付・予約</h3><p>受付・患者登録・予約・マイナ保険証</p><span class="k">26の手順</span></div>
+  <div class="cell"><h3>保険証・公費</h3><p>保険の登録・公費・労災・自賠責・自費</p><span class="k">52の手順</span></div>
+  <div class="cell"><h3>カルテ・処方</h3><p>処置・処方・病名・検査・診療履歴</p><span class="k">63の手順</span></div>
+  <div class="cell"><h3>会計・返金</h3><p>請求・領収書・未収金・返金・日計表</p><span class="k">19の手順</span></div>
+  <div class="cell"><h3>月初の請求</h3><p>レセプトの点検・作成・提出を順番どおりに</p><span class="k">27の手順</span></div>
+  <div class="cell"><h3>算定の入力例</h3><p>加算・管理料・注射・検査の入れ方</p><span class="k">42の手順</span></div>
+  <div class="cell"><h3>設定・集計</h3><p>利用者・マスタ・各種データの集計</p><span class="k">31の手順</span></div>
+  <div class="cell"><h3>困った時</h3><p>ログインできない・動かない時</p><span class="k">30の手順</span></div>
+ </div>
+ <div class="two">
+  <div><h2>こんな時は</h2>
+   <div class="q">保険証が変わった<span>→</span></div><div class="q">予約していた患者さんが来院した<span>→</span></div><div class="q">保険証を後日持ってきた<span>→</span></div></div>
+  <div><h2>最近見た手順</h2>
+   <div class="q">受付を取り消す<span>→</span></div><div class="q">保険と自費の領収書を分ける<span>→</span></div><div class="q">マイナ保険証で再来患者を受付する<span>→</span></div></div>
+ </div>
+</div>
+</body></html>

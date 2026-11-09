@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>試作A</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif;color:#1d2329;background:#f3f4f5;-webkit-font-smoothing:antialiased}
+.hero{position:relative;height:430px;color:#fff;overflow:hidden;background:#202529}
+.hero .ph{position:absolute;inset:0;background:url(photo/about4.jpg) right 30%/cover;filter:grayscale(.15) brightness(.9)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#1b1f23 0%,#1b1f23 38%,rgba(27,31,35,.82) 58%,rgba(27,31,35,.35) 100%)}
+.in{position:relative;z-index:1;width:1200px;margin:0 auto}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:28px 0}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{height:34px}
+.brand b{font-size:17px;font-weight:600;letter-spacing:.06em}
+.brand span{display:block;font-size:12px;color:rgba(255,255,255,.6);letter-spacing:.12em;margin-top:2px}
+.font{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 18px;font-size:13px;color:rgba(255,255,255,.85)}
+h1{font-size:40px;font-weight:300;letter-spacing:.06em;margin-top:44px}
+h1 em{font-style:normal;font-weight:600}
+.search{margin-top:30px;width:760px;height:68px;background:#fff;border-radius:14px;display:flex;align-items:center;gap:16px;padding:0 10px 0 24px;box-shadow:0 18px 40px rgba(0,0,0,.28)}
+.search svg{width:24px;height:24px;stroke:#1f8f98;fill:none;stroke-width:2.2}
+.search span{flex:1;font-size:19px;color:#98a2ad}
+.search i{font-style:normal;background:#1f8f98;color:#fff;font-size:15px;font-weight:600;border-radius:10px;padding:13px 26px}
+.words{margin-top:18px;font-size:14px;color:rgba(255,255,255,.62);display:flex;gap:22px}
+.words b{font-weight:400;color:#fff;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
+.main{width:1200px;margin:-0px auto 0;display:grid;grid-template-columns:1fr 380px;gap:28px;padding:40px 0 60px}
+h2{font-size:15px;font-weight:600;letter-spacing:.1em;color:#5b6670;margin-bottom:14px}
+.panel{background:#fff;border-radius:16px;overflow:hidden}
+.row{display:grid;grid-template-columns:6px 1fr auto 20px;gap:22px;align-items:center;padding:20px 26px 20px 0;border-top:1px solid #eceef0}
+.row:first-child{border-top:0}
+.row .c{height:44px;border-radius:0 3px 3px 0}
+.t{background:#1f8f98}.b{background:#2459b0}.n{background:#3b4650}
+.row h3{font-size:19px;font-weight:600;letter-spacing:.03em}
+.row p{font-size:13.5px;color:#6b7680;margin-top:3px}
+.row .k{font-size:13px;color:#8a949d}
+.row svg{width:18px;height:18px;stroke:#b4bcc4;fill:none;stroke-width:2}
+.side .panel{padding:8px 22px}
+.q{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-top:1px solid #eceef0;font-size:15px}
+.q:first-child{border-top:0}
+.q span{color:#1f8f98;font-size:18px}
+.side h2+.panel{margin-bottom:26px}
+.rec{display:flex;align-items:center;gap:12px;padding:13px 0;border-top:1px solid #eceef0;font-size:14.5px}
+.rec:first-child{border-top:0}
+.dot{width:8px;height:8px;border-radius:50%}
+</style></head><body>
+<section class="hero"><div class="ph"></div>
+ <div class="in">
+  <div class="bar"><div class="brand"><img src="photo/logo_t.png" alt=""><div><b>デジカル操作ガイド</b><span>やまうちクリニック</span></div></div><div class="font">文字を大きく</div></div>
+  <h1>今日は、<em>何を調べますか。</em></h1>
+  <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>やりたいこと・困っていることを入力</span><i>探す</i></div>
+  <div class="words">よく探される言葉　<b>受付 取消</b><b>保険証 あとから</b><b>マイナ保険証</b><b>領収書 自費</b></div>
+ </div>
+</section>
+<div class="main">
+ <div>
+  <h2>業務から探す</h2>
+  <div class="panel">
+   <div class="row"><div class="c t"></div><div><h3>受付・予約</h3><p>受付・患者登録・予約・マイナ保険証</p></div><div class="k">26の手順</div><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+   <div class="row"><div class="c t"></div><div><h3>保険証・公費</h3><p>保険の登録・公費・労災・自費</p></div><div class="k">52の手順</div><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+   <div class="row"><div class="c b"></div><div><h3>カルテ・処方</h3><p>処置・処方・病名・検査・履歴</p></div><div class="k">63の手順</div><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+   <div class="row"><div class="c b"></div><div><h3>会計・返金</h3><p>請求・領収書・未収金・返金・日計表</p></div><div class="k">19の手順</div><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+   <div class="row"><div class="c b"></div><div><h3>月初の請求</h3><p>レセプトの点検・作成・提出を順番どおりに</p></div><div class="k">27の手順</div><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+   <div class="row"><div class="c n"></div><div><h3>算定の入力例・設定・困った時</h3><p>加算の入れ方、利用者やマスタの設定、ログインできない時</p></div><div class="k">103の手順</div><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+  </div>
+ </div>
+ <div class="side">
+  <h2>こんな時は</h2>
+  <div class="panel">
+   <div class="q">保険証が変わった<span>→</span></div>
+   <div class="q">予約していた患者さんが来院した<span>→</span></div>
+   <div class="q">保険証を後日持ってきた<span>→</span></div>
+   <div class="q">お金が足りないと言われた<span>→</span></div>
+   <div class="q">ログインできない・動かない<span>→</span></div>
+  </div>
+  <h2>最近見た手順</h2>
+  <div class="panel">
+   <div class="rec"><span class="dot t"></span>受付を取り消す</div>
+   <div class="rec"><span class="dot b"></span>保険と自費の領収書を分ける</div>
+   <div class="rec"><span class="dot t"></span>マイナ保険証で再来患者を受付する</div>
+  </div>
+ </div>
+</div>
+</body></html>

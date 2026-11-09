@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>試作C</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif;color:#18232d;background:#f2f5f6;-webkit-font-smoothing:antialiased}
+.in{width:1200px;margin:0 auto}
+header{background:#fff;border-bottom:1px solid #e1e6e9}
+.bar{display:flex;align-items:center;gap:28px;height:76px}
+.brand{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:600;letter-spacing:.05em;white-space:nowrap}
+.brand img{height:30px}
+.search{flex:1;height:48px;border-radius:12px;background:#f2f5f6;display:flex;align-items:center;gap:12px;padding:0 18px;border:1.5px solid transparent}
+.search svg{width:20px;height:20px;stroke:#1f8f98;fill:none;stroke-width:2.2}
+.search span{color:#8d98a2;font-size:15.5px}
+.font{font-size:13px;color:#4f5b66;border:1px solid #d5dce1;border-radius:10px;padding:9px 14px;white-space:nowrap}
+.greet{display:flex;align-items:flex-end;justify-content:space-between;padding:44px 0 22px}
+.greet h1{font-size:30px;font-weight:600;letter-spacing:.04em}
+.greet p{font-size:14.5px;color:#66727c;margin-top:8px}
+.greet .day{font-size:14px;color:#66727c}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
+.st{background:#fff;border-radius:18px;padding:22px 22px 14px;position:relative}
+.st:not(:last-child)::after{content:"";position:absolute;right:-12px;top:42px;width:10px;height:10px;border-top:2px solid #b8c3cb;border-right:2px solid #b8c3cb;transform:rotate(45deg);z-index:2}
+.st.now{box-shadow:0 0 0 2px #1f8f98}
+.when{font-size:12.5px;font-weight:600;letter-spacing:.08em;color:#1f8f98}
+.st.b .when{color:#2459b0}
+.st.m .when{color:#6b5bb5}
+.st h2{font-size:24px;font-weight:600;margin:6px 0 14px;letter-spacing:.03em}
+.it{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid #edf1f3;font-size:15px}
+.it span{color:#b0bac2}
+.more{display:block;padding:12px 0 4px;font-size:13.5px;color:#1f8f98;border-top:1px solid #edf1f3}
+.st.b .more{color:#2459b0}.st.m .more{color:#6b5bb5}
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 50px}
+.box{background:#fff;border-radius:18px;padding:22px 24px}
+.box h3{font-size:16px;font-weight:600;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#eef6f6;color:#145f66;border-radius:999px;padding:9px 16px;font-size:14px}
+.oth{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.o{border:1px solid #e3e8eb;border-radius:12px;padding:14px 16px}
+.o b{display:block;font-size:15.5px}
+.o small{font-size:12.5px;color:#76818a}
+</style></head><body>
+<header><div class="in bar"><div class="brand"><img src="../site/logo.png" alt="">デジカル操作ガイド</div><div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>やりたいこと・困っていることを入力</span></div><div class="font">文字を大きく</div></div></header>
+<div class="in">
+ <div class="greet"><div><h1>いまの業務から選んでください</h1><p>患者さんの流れの順に並んでいます。迷ったら上の検索欄へ。</p></div><div class="day">やまうちクリニック</div></div>
+ <div class="flow">
+  <div class="st"><div class="when">来院したら</div><h2>受付</h2>
+   <div class="it">患者さんを受付する<span>›</span></div><div class="it">マイナ保険証で受付<span>›</span></div><div class="it">新しい患者さんを登録<span>›</span></div><div class="it">受付を取り消す<span>›</span></div>
+   <span class="more">保険証・予約もふくむ 78の手順</span></div>
+  <div class="st b"><div class="when">診察中</div><h2>カルテ・処方</h2>
+   <div class="it">処置・行為を入れる<span>›</span></div><div class="it">薬を処方する<span>›</span></div><div class="it">病名を登録する<span>›</span></div><div class="it">前回と同じ内容を入れる<span>›</span></div>
+   <span class="more">算定の入力例もふくむ 105の手順</span></div>
+  <div class="st b"><div class="when">お帰りの前に</div><h2>会計</h2>
+   <div class="it">会計をする<span>›</span></div><div class="it">保険と自費で領収書を分ける<span>›</span></div><div class="it">未収金にする<span>›</span></div><div class="it">返金する<span>›</span></div>
+   <span class="more">日計表もふくむ 19の手順</span></div>
+  <div class="st m"><div class="when">月のはじめに</div><h2>請求</h2>
+   <div class="it">点検用のレセプトを作る<span>›</span></div><div class="it">内容を確認して直す<span>›</span></div><div class="it">提出用のレセプトを作る<span>›</span></div><div class="it">オンラインで請求する<span>›</span></div>
+   <span class="more">順番どおりの 27の手順</span></div>
+ </div>
+ <div class="lower">
+  <div class="box"><h3>こんな時は</h3><div class="chips"><span class="chip">保険証が変わった</span><span class="chip">保険証を後日持ってきた</span><span class="chip">予約の患者さんが来院した</span><span class="chip">お金が足りないと言われた</span><span class="chip">同じ日にもう一度来た</span></div></div>
+  <div class="box"><h3>そのほか</h3><div class="oth"><div class="o"><b>設定・集計</b><small>利用者・マスタ</small></div><div class="o"><b>困った時</b><small>ログイン・障害</small></div><div class="o"><b>お気に入り</b><small>よく使う手順</small></div></div></div>
+ </div>
+</div>
+</body></html>

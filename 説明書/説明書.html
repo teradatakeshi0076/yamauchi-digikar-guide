@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>デジカル操作ガイド かんたん説明書</title>
+<style>
+@page{size:A4;margin:0}
+:root{--teal:#1f8f98;--teal-d:#12656c;--teal-l:#e4f4f4;--blue:#2459b0;--blue-d:#173f86;--blue-l:#e7eefa;--navy:#1b2f57;--ink:#0f2238;--ink2:#4a5d74;--line:#d3dde8;--warn:#9a5200;--warn-bg:#fff3e0;--warn-line:#f2c48a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;padding:14mm 15mm 12mm;position:relative;overflow:hidden;page-break-after:always;background:#fff}
+.page:last-child{page-break-after:auto}
+@media screen{body{background:#e9eef3}.page{margin:16px auto;box-shadow:0 2px 12px rgba(0,0,0,.12)}}
+.head{display:flex;align-items:center;gap:12px;padding-bottom:10px;border-bottom:3px solid var(--teal)}
+.head img{width:40px;height:40px}
+.head h1{font-size:22px;letter-spacing:.02em}
+.head p{font-size:12.5px;color:var(--ink2)}
+.lead{font-size:13.5px;line-height:1.75;margin:12px 0 6px;color:var(--ink)}
+.step{display:grid;grid-template-columns:96mm 1fr;gap:7mm;align-items:center;padding:6mm 0;border-bottom:1px solid var(--line)}
+.step:last-of-type{border-bottom:0}
+.step h2{display:flex;align-items:center;gap:10px;font-size:19px;margin-bottom:8px}
+.n{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-size:17px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.step p{font-size:13.5px;line-height:1.8}
+.step p+p{margin-top:6px}
+.ex{margin-top:8px;font-size:12.5px;color:var(--teal-d);background:var(--teal-l);border-radius:8px;padding:7px 10px;line-height:1.7}
+b.k{color:var(--blue-d)}
+svg{display:block;width:100%;height:auto}
+.foot{position:absolute;left:15mm;right:15mm;bottom:9mm;display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink2)}
+h2.sec{font-size:18px;margin:14px 0 10px;display:flex;align-items:center;gap:8px}
+h2.sec::before{content:"";width:6px;height:20px;background:var(--teal);border-radius:2px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.card{border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:30mm 1fr;gap:10px;align-items:center}
+.card h3{font-size:14.5px;margin-bottom:3px}
+.card p{font-size:12px;line-height:1.7;color:var(--ink)}
+.help{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm}
+.help div{background:var(--blue-l);border-radius:10px;padding:10px 12px}
+.help b{display:block;font-size:13.5px;color:var(--blue-d);margin-bottom:3px}
+.help span{font-size:12px;line-height:1.7}
+.notes{list-style:none;font-size:12.5px;line-height:1.8}
+.notes li{padding-left:16px;position:relative}
+.notes li::before{content:"";position:absolute;left:3px;top:.75em;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.addr{margin-top:12px;border:2px solid var(--blue);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:14px}
+.addr b{font-size:14px;white-space:nowrap}
+.addr .blank{flex:1;border-bottom:1.5px dashed #9fb1c6;height:24px}
+</style>
+</head>
+<body>
+
+<!-- 1枚目 -->
+<section class="page">
+  <div class="head">
+    <img src="../site/logo.png" alt="">
+    <div><h1>デジカル操作ガイド　かんたん説明書</h1><p>やまうちクリニック　スタッフの皆さま用</p></div>
+  </div>
+  <p class="lead">電子カルテ「デジカル」の操作マニュアル(705ページ)を、<b>やりたいことから引ける</b>ようにしたページです。<br>忙しい時は、次の3つだけ覚えておけば使えます。</p>
+
+  <div class="step">
+    <svg viewBox="0 0 360 230" aria-hidden="true">
+      <rect x="1" y="1" width="358" height="228" rx="12" fill="#f4f7fa" stroke="#d3dde8"/>
+      <rect x="1" y="1" width="358" height="42" rx="12" fill="#fff"/><rect x="1" y="30" width="358" height="13" fill="#fff"/>
+      <rect x="1" y="42" width="358" height="3" fill="#1f8f98"/>
+      <rect x="14" y="11" width="20" height="20" rx="4" fill="#1f8f98"/>
+      <rect x="44" y="8" width="300" height="27" rx="8" fill="#fff" stroke="#2459b0" stroke-width="2"/>
+      <circle cx="58" cy="21" r="5.5" fill="none" stroke="#2459b0" stroke-width="2"/><path d="M62 25l4 4" stroke="#2459b0" stroke-width="2" stroke-linecap="round"/>
+      <text x="74" y="26" font-size="13" fill="#0f2238">保険証 あとから</text>
+      <rect x="180" y="13" width="1.6" height="16" fill="#0f2238"/>
+      <rect x="44" y="44" width="300" height="146" rx="10" fill="#fff" stroke="#d3dde8"/>
+      <rect x="50" y="50" width="288" height="42" rx="7" fill="#e7eefa"/>
+      <text x="60" y="68" font-size="12" font-weight="bold" fill="#0f2238">返金2 後日の保険証・当日診察なし</text>
+      <rect x="262" y="58" width="64" height="15" rx="7.5" fill="#dfe8f7"/><text x="294" y="69" font-size="9" fill="#173f86" text-anchor="middle">会計・返金</text>
+      <text x="60" y="84" font-size="9.5" fill="#4a5d74">こんな時: 保険証を後日持ってきた</text>
+      <text x="60" y="112" font-size="12" font-weight="bold" fill="#0f2238">返金3 後日の保険証・当日診察あり</text>
+      <text x="60" y="127" font-size="9.5" fill="#4a5d74">こんな時: 保険証を持ってきて、その日も診察</text>
+      <text x="60" y="153" font-size="12" font-weight="bold" fill="#0f2238">返金1 保険証を当日中に出された</text>
+      <text x="60" y="168" font-size="9.5" fill="#4a5d74">こんな時: 同じ日に家から持ってきた</text>
+      <rect x="236" y="200" width="108" height="22" rx="11" fill="#e4f4f4"/>
+      <text x="290" y="215" font-size="11" fill="#12656c" font-weight="bold" text-anchor="middle">押すと手順が開く</text>
+      <path d="M326 199v-6" stroke="#1f8f98" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <h2><span class="n">1</span>普段の言葉で探す</h2>
+      <p>上の検索欄に、<b class="k">やりたいこと・困っていること</b>をそのまま入れます。入れるそばから候補が出るので、押すか<b class="k">Enterキー</b>で開きます。</p>
+      <div class="ex">こんな言い方でも出てきます<br>「キャンセル」「お金 足りない」「マル乳」「12(公費の番号)」</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <svg viewBox="0 0 360 230" aria-hidden="true">
+      <rect x="1" y="1" width="358" height="228" rx="12" fill="#fff" stroke="#d3dde8"/>
+      <text x="18" y="32" font-size="16" font-weight="bold" fill="#0f2238">受付を取り消す</text>
+      <text x="18" y="50" font-size="9.5" fill="#4a5d74">間違えた受付を取り消します。</text>
+      <rect x="18" y="60" width="324" height="44" rx="8" fill="#fff3e0" stroke="#f2c48a"/>
+      <text x="30" y="77" font-size="10.5" font-weight="bold" fill="#9a5200">注意</text>
+      <text x="30" y="94" font-size="10" fill="#9a5200">カルテを作った後は取消できません。先にカルテを削除。</text>
+      <circle cx="32" cy="127" r="12" fill="#1f8f98"/><path d="M26 127l4 4 8-8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="54" y="131" font-size="11.5" fill="#8a9bb0" text-decoration="line-through">患者さんの「ステータス」を押す</text>
+      <line x1="18" y1="148" x2="342" y2="148" stroke="#e6ecf2"/>
+      <circle cx="32" cy="170" r="12" fill="#2459b0"/><text x="32" y="174.5" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">2</text>
+      <text x="54" y="174" font-size="11.5" font-weight="bold" fill="#0f2238">一番下の「取消」を押す</text>
+      <rect x="54" y="184" width="170" height="34" rx="5" fill="#f4f7fa" stroke="#d3dde8"/>
+      <rect x="60" y="190" width="70" height="7" rx="2" fill="#d3dde8"/><rect x="60" y="203" width="110" height="7" rx="2" fill="#d3dde8"/>
+      <rect x="252" y="117" width="88" height="22" rx="11" fill="#e4f4f4"/>
+      <text x="296" y="132" font-size="10.5" fill="#12656c" font-weight="bold" text-anchor="middle">番号を押すと済み</text>
+    </svg>
+    <div>
+      <h2><span class="n">2</span>注意を読んで、番号の順に</h2>
+      <p>開いたら、まず<b class="k">オレンジの「注意」</b>を読みます。間違えると困ることが書いてあります。</p>
+      <p>そのあと<b class="k">番号の順</b>に操作します。番号を押すと「済み」の印が付くので、電話などで手を離しても続きが分かります。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <svg viewBox="0 0 360 230" aria-hidden="true">
+      <rect x="1" y="1" width="358" height="228" rx="12" fill="#f4f7fa" stroke="#d3dde8"/>
+      <rect x="18" y="40" width="130" height="86" rx="6" fill="#fff" stroke="#d3dde8"/>
+      <rect x="18" y="40" width="130" height="16" rx="6" fill="#2c5a2c"/><rect x="18" y="50" width="130" height="6" fill="#2c5a2c"/>
+      <rect x="28" y="66" width="50" height="6" rx="2" fill="#d3dde8"/><rect x="28" y="80" width="90" height="6" rx="2" fill="#d3dde8"/><rect x="28" y="94" width="70" height="6" rx="2" fill="#d3dde8"/>
+      <rect x="92" y="103" width="36" height="16" rx="3" fill="none" stroke="#e53935" stroke-width="2.2"/>
+      <rect x="116" y="128" width="30" height="14" rx="4" fill="#1b2f57"/><text x="131" y="138" font-size="8.5" fill="#fff" text-anchor="middle">拡大</text>
+      <path d="M160 92h26" stroke="#1f8f98" stroke-width="3" stroke-linecap="round"/><path d="M180 84l9 8-9 8" fill="none" stroke="#1f8f98" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="198" y="14" width="148" height="202" rx="8" fill="#16243a"/>
+      <rect x="206" y="34" width="132" height="152" rx="6" fill="#fff"/>
+      <rect x="206" y="34" width="132" height="22" rx="6" fill="#2c5a2c"/><rect x="206" y="48" width="132" height="8" fill="#2c5a2c"/>
+      <text x="214" y="49" font-size="9.5" fill="#fff">受付編集</text>
+      <text x="214" y="78" font-size="9.5" fill="#0f2238">受付日　2025/07/29</text>
+      <text x="214" y="100" font-size="9.5" fill="#0f2238">患者　　テスト　花子</text>
+      <text x="214" y="122" font-size="9.5" fill="#0f2238">医師　　テスト　医師</text>
+      <text x="214" y="148" font-size="9.5" fill="#0f2238">医療保険</text>
+      <rect x="260" y="135" width="22" height="18" rx="3" fill="none" stroke="#e53935" stroke-width="2.4"/><text x="271" y="148" font-size="12" fill="#0f2238" text-anchor="middle">+</text>
+      <text x="272" y="205" font-size="9.5" fill="#cfe0f2" text-anchor="middle">原寸で大きく表示</text>
+    </svg>
+    <div>
+      <h2><span class="n">3</span>画面写真は押して大きく</h2>
+      <p>手順の下の写真は、<b class="k">実際のデジカルの画面</b>です。<b class="k">赤い枠</b>が押す場所です。</p>
+      <p>写真を押すと原寸で大きく開き、画面の中の小さい文字まで読めます。もう一度押すと全体表示、「閉じる」で元に戻ります。</p>
+    </div>
+  </div>
+
+  <div class="foot"><span>デジカル操作ガイド　かんたん説明書</span></div>
+</section>
+
+<!-- 2枚目 -->
+<section class="page">
+  <div class="head">
+    <img src="../site/logo.png" alt="">
+    <div><h1>便利な使い方</h1><p>覚えておくと、もっと早く探せます</p></div>
+  </div>
+
+  <h2 class="sec">トップページと検索欄</h2>
+  <div class="grid">
+    <div class="card">
+      <svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect x="2" y="4" width="54" height="34" rx="6" fill="#fff" stroke="#1f8f98" stroke-width="1.5"/><rect x="62" y="4" width="54" height="34" rx="6" fill="#fff" stroke="#1f8f98" stroke-width="1.5"/>
+        <rect x="2" y="44" width="54" height="34" rx="6" fill="#fff" stroke="#2459b0" stroke-width="1.5"/><rect x="62" y="44" width="54" height="34" rx="6" fill="#fff" stroke="#2459b0" stroke-width="1.5"/>
+        <text x="29" y="25" font-size="7.5" fill="#12656c" text-anchor="middle" font-weight="bold">受付・予約</text><text x="89" y="25" font-size="7.5" fill="#12656c" text-anchor="middle" font-weight="bold">保険証・公費</text>
+        <text x="29" y="65" font-size="7.5" fill="#173f86" text-anchor="middle" font-weight="bold">カルテ・処方</text><text x="89" y="65" font-size="7.5" fill="#173f86" text-anchor="middle" font-weight="bold">会計・返金</text>
+      </svg>
+      <div><h3>分野から探す</h3><p>言葉が浮かばない時は、8つの分野から一覧で選べます。「月初の請求」は作業の順番どおりに並んでいます。</p></div>
+    </div>
+    <div class="card">
+      <svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect x="2" y="6" width="96" height="20" rx="10" fill="#fff" stroke="#d3dde8"/><text x="50" y="20" font-size="8.5" fill="#0f2238" text-anchor="middle">保険証が変わった</text>
+        <rect x="14" y="31" width="104" height="20" rx="10" fill="#e4f4f4" stroke="#1f8f98"/><text x="66" y="45" font-size="8.5" fill="#12656c" text-anchor="middle">予約の方が来院した</text>
+        <rect x="2" y="56" width="90" height="20" rx="10" fill="#fff" stroke="#d3dde8"/><text x="47" y="70" font-size="8.5" fill="#0f2238" text-anchor="middle">診察後に会計したい</text>
+      </svg>
+      <div><h3>こんな時は?</h3><p>トップに、受付や会計でよくある場面が並んでいます。押すとその手順がすぐ開きます。</p></div>
+    </div>
+    <div class="card">
+      <svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect x="2" y="2" width="116" height="18" rx="5" fill="#fff" stroke="#2459b0" stroke-width="1.5"/>
+        <rect x="2" y="24" width="116" height="54" rx="6" fill="#fff" stroke="#d3dde8"/>
+        <text x="10" y="36" font-size="7.5" fill="#4a5d74">最近の検索</text>
+        <circle cx="14" cy="49" r="4" fill="none" stroke="#7d8ea3" stroke-width="1.2"/><text x="24" y="52" font-size="8.5" fill="#0f2238">返金</text>
+        <circle cx="14" cy="66" r="4" fill="none" stroke="#7d8ea3" stroke-width="1.2"/><text x="24" y="69" font-size="8.5" fill="#0f2238">マイナ</text>
+      </svg>
+      <div><h3>最近の検索</h3><p>空の検索欄を押すと、最近探した言葉が8つまで出ます。押せば同じ検索がすぐできます。「履歴を消す」で消せます。</p></div>
+    </div>
+    <div class="card">
+      <svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect x="10" y="20" width="100" height="40" rx="8" fill="#fff6d6" stroke="#e9c552" stroke-width="1.5"/>
+        <path d="M30 30l3.6 7.3 8 1.2-5.8 5.6 1.4 8L30 48.3l-7.2 3.8 1.4-8-5.8-5.6 8-1.2z" fill="#e9c552"/>
+        <text x="72" y="44" font-size="10" fill="#7a5a00" text-anchor="middle" font-weight="bold">お気に入り</text>
+      </svg>
+      <div><h3>お気に入り・最近見た手順</h3><p>よく使う手順は「お気に入り」を押すと、トップに置いておけます。最近見た手順もトップに出ます。</p></div>
+    </div>
+    <div class="card">
+      <svg viewBox="0 0 120 80" aria-hidden="true">
+        <text x="22" y="56" font-size="22" fill="#4a5d74" text-anchor="middle">あ</text>
+        <path d="M44 44h22" stroke="#1f8f98" stroke-width="2.5" stroke-linecap="round"/><path d="M60 38l7 6-7 6" fill="none" stroke="#1f8f98" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="94" y="60" font-size="34" fill="#0f2238" text-anchor="middle" font-weight="bold">あ</text>
+      </svg>
+      <div><h3>文字を大きく</h3><p>右上の「文字 大」を押すと、全体の文字が大きくなります。もう一度押すと元に戻ります。</p></div>
+    </div>
+    <div class="card">
+      <svg viewBox="0 0 120 80" aria-hidden="true">
+        <rect x="34" y="8" width="52" height="22" rx="2" fill="#fff" stroke="#4a5d74" stroke-width="1.5"/>
+        <rect x="18" y="28" width="84" height="32" rx="6" fill="#e7eefa" stroke="#2459b0" stroke-width="1.5"/>
+        <rect x="34" y="50" width="52" height="26" rx="2" fill="#fff" stroke="#4a5d74" stroke-width="1.5"/>
+        <rect x="42" y="58" width="36" height="3" fill="#d3dde8"/><rect x="42" y="66" width="26" height="3" fill="#d3dde8"/>
+      </svg>
+      <div><h3>印刷</h3><p>手順のページ右上の「印刷」で、その手順だけを紙に出せます。受付の横に貼っておく時などに。</p></div>
+    </div>
+  </div>
+
+  <h2 class="sec">うまく見つからない時は</h2>
+  <div class="help">
+    <div><b>短い言葉にする</b><span>「返金」「保険証」「取消」のように、2〜4文字の言葉で探してみます。</span></div>
+    <div><b>言い方を変える</b><span>「払い戻し」→「返金」、「病名」→「傷病名」のように、別の言い方で試します。</span></div>
+    <div><b>分野から探す</b><span>トップの8つの分野から、一覧を順に見ていきます。</span></div>
+  </div>
+
+  <h2 class="sec">知っておいてほしいこと</h2>
+  <ul class="notes">
+    <li>お気に入り・最近の検索・「済み」の印は、<b>そのパソコンやスマホの中だけ</b>に残ります。ほかの人からは見えません。</li>
+    <li>パソコンでは、キーボードの「/」を押すと、どこからでも検索欄に入れます。</li>
+    <li>内容は「デジカル操作マニュアル」(2026年10月27日更新)に基づいています。画面写真の患者名は見本の名前です。</li>
+    <li>東京都以外の公費は、「保険証・公費」の一番下にまとめてあります。</li>
+  </ul>
+
+  <div class="addr"><b>ガイドのページのアドレス</b><span class="blank"></span></div>
+
+  <div class="foot"><span>デジカル操作ガイド　かんたん説明書</span></div>
+</section>
+</body>
+</html>

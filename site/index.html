@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>デジカル操作ガイド｜やまうちクリニック</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="style.css?v=202611080440">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/" aria-label="ホームへ">
+      <img src="logo.png" alt="" width="34" height="34">
+      <span class="brand-t"><b>デジカル操作ガイド</b><small>やまうちクリニック</small></span>
+    </a>
+    <div class="search" id="search">
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="q" type="search" autocomplete="off" placeholder="やりたいこと・困っていることを入力" aria-label="検索">
+      <kbd class="hint-key">/</kbd>
+      <button class="clear" id="qclear" aria-label="入力を消す" hidden>×</button>
+      <div class="results" id="results" role="listbox" hidden></div>
+    </div>
+    <div class="tools">
+      <button id="fontBtn" class="tbtn" title="文字の大きさ">文字 大</button>
+    </div>
+  </div>
+</header>
+<main id="app" tabindex="-1"></main>
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lb-bar"><span id="lbCap"></span><button id="lbClose" aria-label="閉じる">閉じる ×</button></div>
+  <div class="lb-body" id="lbBody"></div>
+</div>
+<script src="data.js?v=202611080440"></script>
+<script src="app.js?v=202611080440"></script>
+</body>
+</html>
