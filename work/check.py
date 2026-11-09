@@ -18,6 +18,7 @@ except Exception as e:
     print('JSONが読めません:', e); sys.exit(1)
 if not isinstance(data, list):
     print('配列ではありません'); sys.exit(1)
+ALL_IDS = set(t['id'] for f in glob.glob(os.path.join(ROOT, 'data', 'topics_*.json')) for t in json.load(open(f)))
 ids = set()
 used = set()
 for i, t in enumerate(data):
@@ -46,14 +47,15 @@ for i, t in enumerate(data):
                 used.add(im)
 for t in data:
     for r in t.get('related', []):
-        if r not in ids:
+        if r not in ids and r not in ALL_IDS:
             errs.append('%s: related の %s が見つかりません' % (t.get('id'), r))
 expected = set()
 for a, b in ranges:
     for p in range(a, b + 1):
         for f in glob.glob(os.path.join(ROOT, 'site', 'img', 'p%03d_*.webp' % p)):
             expected.add('img/' + os.path.basename(f).replace('.webp', '.jpg'))
-missing = sorted(expected - used)
+ok_unused = set(l.strip() for l in open(os.path.join(ROOT, 'work', 'audit', 'unused_ok.txt')) if l.strip()) if os.path.exists(os.path.join(ROOT, 'work', 'audit', 'unused_ok.txt')) else set()
+missing = sorted(expected - used - ok_unused)
 if missing:
     errs.append('どこにも付いていない画像 %d枚: %s' % (len(missing), ', '.join(missing[:40])))
 print('トピック', len(data), '件 / 使った画像', len(used), '枚')

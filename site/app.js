@@ -53,16 +53,27 @@
     ['当日', '今日', 'その日']
   ].map(function (g) { return g.map(norm); });
 
+  // 検索語の言い換えを作る。[語, 重み] の並び。
+  // 1) 入力そのまま(重み1)
+  // 2) 入力の中の辞書語だけを言い換えた形(重み0.8)。例「投薬日数を一括」→「処方日数を一括」
+  // 3) 辞書語そのもの(重み0.3)。長い文で入れた時の拾い漏れを防ぐ補助。弱くして、他の項目が
+  //    題名どおりの項目より上に来ないようにする
   function variants(term) {
-    var v = [term];
+    var v = [[term, 1]];
+    var add = function (w, k) {
+      if (!w) return;
+      for (var i = 0; i < v.length; i++) if (v[i][0] === w) { if (v[i][1] < k) v[i][1] = k; return; }
+      v.push([w, k]);
+    };
     SYN.forEach(function (g) {
-      for (var i = 0; i < g.length; i++) {
-        if (g[i].length >= 2 && (term.indexOf(g[i]) >= 0)) {
-          g.forEach(function (w) { if (v.indexOf(w) < 0) v.push(w); });
-          // 言い換えた語で term 中の語を置き換えた形も
-          return;
-        }
-      }
+      g.forEach(function (m) {
+        if (m.length < 2 || term.indexOf(m) < 0) return;
+        g.forEach(function (w) {
+          if (w === m) return;
+          add(term.split(m).join(w), term === m ? 0.8 : 0.8);
+          add(w, term === m ? 0.8 : 0.3);
+        });
+      });
     });
     return v;
   }
@@ -70,7 +81,7 @@
   /* ---------- 検索の下ごしらえ ---------- */
   var IDX = G.topics.map(function (t) {
     var steps = [];
-    (t.parts || []).forEach(function (p) { if (p.heading) steps.push(p.heading); (p.steps || []).forEach(function (s) { steps.push(s.text, s.note || ''); }); });
+    (t.parts || []).forEach(function (p) { if (p.heading) steps.push(p.heading); (p.steps || []).forEach(function (s) { steps.push(String(s.text || '').replace(/\[\[[^\]]+\]\]/g, ''), String(s.note || '').replace(/\[\[[^\]]+\]\]/g, '')); }); });
     return {
       t: t,
       f: [
@@ -87,21 +98,27 @@
 
   function termScore(ix, vs) {
     var best = 0;
-    vs.forEach(function (w, i) {
-      var s = 0;
+    vs.forEach(function (pair) {
+      var w = pair[0], s = 0;
       if (/^\d+$/.test(w)) {
-        // 数字だけ(法別番号など)は、検索用の言葉の中で数字として一致したときだけ
-        if (new RegExp('(^|[^0-9])' + w + '([^0-9]|$)').test(ix.f[1][0] + '|' + ix.f[0][0])) s = /公費|助成/.test(ix.t.title) ? 16 : 10;
+        // 数字だけ(法別番号など)は、前後が数字でない所で一致したときだけ数える(「12」が「120」に当たらないように)。
+        // 題名・検索用の言葉を重く、本文(都道府県の公費の表など)も軽く数える
+        var re = new RegExp('(^|[^0-9])' + w + '([^0-9]|$)');
+        ix.f.forEach(function (f) { if (re.test(f[0])) s += f[1]; });
+        if (s && /公費|助成/.test(ix.t.title)) s += 6;
       } else {
         ix.f.forEach(function (f) { if (f[0].indexOf(w) >= 0) s += f[1]; });
       }
-      if (i > 0) s *= 0.6;
+      s *= pair[1];
       if (s > best) best = s;
     });
     return best;
   }
   function bigrams(s) { var a = []; for (var i = 0; i < s.length - 1; i++) a.push(s.substr(i, 2)); return a; }
 
+  // 動作確認用(検索の回帰テストで使う)
+  window.__guideSearch = function (raw) { return search(raw).map(function (o) { return { id: o.t.id, s: Math.round(o.s) }; }); };
+  window.__guideVariants = function (raw) { return variants(norm(raw)); };
   function search(raw) {
     var terms = String(raw).split(/[\s　]+/).map(norm).filter(Boolean);
     if (!terms.length) return [];
@@ -128,6 +145,13 @@
       }
     }
     out.forEach(function (o) { if (o.t.region === 'other' && !wantPref) o.s *= 0.3; });
+    // 題名と同じ言葉で探した時は、その項目を必ず一番上に。題名にそのまま含まれる時も上げる
+    var whole = terms.join('');
+    out.forEach(function (o) {
+      var nt = norm(o.t.title);
+      if (nt === whole) o.s += 1000;
+      else if (whole.length >= 2 && nt.indexOf(whole) >= 0) o.s += 20;
+    });
     out.sort(function (a, b) { return b.s - a.s || a.t.order - b.t.order; });
     return out.slice(0, 14).map(function (o) { o.terms = vss; return o; });
   }
@@ -322,8 +346,8 @@
         var label = raw ? '' : String(++n);
         return '<li class="step' + (done[key] ? ' done' : '') + '" data-k="' + key + '">' +
           '<button class="num" aria-label="手順' + label + 'を済みにする" title="押すと「済み」になります">' + (done[key] ? '✓' : label) + '</button>' +
-          '<div>' + (s.text ? '<div class="stxt">' + esc(s.text) + '</div>' : '') +
-          (s.note ? '<div class="snote">※ ' + esc(s.note) + '</div>' : '') +
+          '<div>' + (s.text ? '<div class="stxt">' + rich(s.text) + '</div>' : '') +
+          (s.note ? '<div class="snote">※ ' + rich(s.note) + '</div>' : '') +
           ((s.imgs || []).length ? '<div class="shots">' + s.imgs.map(function (src) {
             var sz = (G.sizes || {})[src];
             var wh = sz ? ' width="' + sz[0] + '" height="' + sz[1] + '" style="width:' + sz[0] + 'px"' : '';
@@ -341,6 +365,7 @@
       parts +
       (n > 1 ? '<div class="donebar">番号を押すと「済み」になります。<button id="resetDone">済みを全部もどす</button></div>' : '') +
       (t.tips.length ? '<div class="tips"><b>知っておくと便利</b><ul>' + t.tips.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div>' : '') +
+      linksHtml(t) +
       (t.related.length ? '<h2>あわせて見る</h2><div class="rel">' + t.related.map(function (r) { return TOP[r] ? '<a href="#/t/' + r + '">' + esc(TOP[r].title) + '</a>' : ''; }).join('') + '</div>' : '') +
       sameCat(t) + foot();
 
@@ -366,6 +391,21 @@
       var fit = function () { if (im.naturalWidth) im.style.width = Math.round(im.naturalWidth / 2) + 'px'; };
       if (!(G.sizes || {})[b.dataset.src]) { if (im.complete) fit(); else im.addEventListener('load', fit); }
     });
+  }
+
+
+  /* 文中のアイコン [[img/icon_xxx.webp]] と URL を表示用にする(元の文字は esc 済み) */
+  function rich(text) {
+    var h = esc(text);
+    h = h.replace(/\[\[(img\/[A-Za-z0-9_]+\.webp)\]\]/g, function (m, src) { return '<img class="ic-inline" src="' + src + V + '" alt="">'; });
+    h = h.replace(/(https?:\/\/[A-Za-z0-9\-._~:\/?#@!$&'*+,;=%]+)/g, function (u) { return '<a href="' + u + '" target="_blank" rel="noopener">' + u + '</a>'; });
+    return h;
+  }
+  function linksHtml(t) {
+    if (!(t.links || []).length) return '';
+    return '<h2>参考リンク</h2><ul class="links">' + t.links.map(function (l) {
+      return '<li><a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a><small>' + esc(l.url) + '(マニュアル' + l.page + 'ページ)</small></li>';
+    }).join('') + '</ul><p class="links-note">外部のサイトです。内容や表示はリンク先のサイトによります。</p>';
   }
 
   function sameCat(t) {

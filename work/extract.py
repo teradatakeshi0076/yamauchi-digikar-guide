@@ -15,6 +15,9 @@ doc = fitz.open(PDF)
 start = int(sys.argv[2]) if len(sys.argv) > 2 else 1
 end = int(sys.argv[3]) if len(sys.argv) > 3 else len(doc)
 total_imgs = 0
+PREV = os.path.join(ROOT, 'work', 'pages_prev')
+RENAMES = {}   # 旧画像名 → まとめた後の画像名
+NEWIMGS = []   # 前回になかった新しい画像
 for pno in range(start - 1, end):
     page = doc[pno]
     W = page.rect.width
@@ -34,22 +37,39 @@ for pno in range(start - 1, end):
             items.append({'type': 'text', 'text': t, 'bbox': [round(v) for v in b['bbox']]})
     # 画像の位置(同じ画像が複数ある場合も位置ごと)
     rects = []
+    smalls = []
     natives = []  # (位置, 元の細かさ=1ポイントあたりの画素数)
     for info in page.get_image_info():
         r = fitz.Rect(info['bbox']) & page.rect
+        if r.is_empty:
+            continue
         if r.width < 40 or r.height < 15:
+            smalls.append(r)  # 小さいアイコン類。画面写真に重なるものだけ、その写真に含める
             continue
         rects.append(r)
         natives.append((r, info['width'] / max(fitz.Rect(info['bbox']).width, 1)))
-    # 重なっている画像はまとめる
-    merged = []
-    for r in sorted(rects, key=lambda r: (r.y0, r.x0)):
-        for m in merged:
-            if m.intersects(r):
-                m |= r
-                break
-        else:
-            merged.append(fitz.Rect(r))
+    # 重なっている画像は1枚にまとめる(画面の上に開いたメニュー・ダイアログを含める)。
+    # 以前は、まとめたつもりで重なった画像を捨てていた(Rect の |= が元の要素を変えないため)。
+    # ここでは、重なりがなくなるまで繰り返し合体させる
+    groups = [fitz.Rect(r) for r in rects]
+    changed = True
+    while changed:
+        changed = False
+        out = []
+        for g in groups:
+            for i, o in enumerate(out):
+                if o.intersects(g):
+                    out[i] = o | g
+                    changed = True
+                    break
+            else:
+                out.append(fitz.Rect(g))
+        groups = out
+    for s in smalls:
+        for i, g in enumerate(groups):
+            if g.intersects(s):
+                groups[i] = g | s
+    merged = sorted(groups, key=lambda r: (r.y0, r.x0))
     # 画面写真に重なる吹き出し・矢印・枠(図形)も含めて切り出す
     PA = page.rect.width * page.rect.height
     shapes = []
@@ -59,9 +79,46 @@ for pno in range(start - 1, end):
             if rr.width * rr.height < PA * 0.25:
                 shapes.append(rr)
     texts = [fitz.Rect(b['bbox']) for b in d['blocks'] if b['type'] == 0]
-    k = 0
-    for r0 in merged:
-        k += 1
+    # 名前は前回の切り出し(work/pages_prev)と位置で対応づけて、変えない。
+    # 2枚の旧画像が1枚にまとまった時は、若い番号を残し、対応を RENAMES に記録する
+    prev = []
+    pp = os.path.join(PREV, 'p%03d.json' % (pno + 1))
+    if os.path.exists(pp):
+        prev = [it for it in json.load(open(pp))['items'] if it['type'] == 'img']
+    used_idx = [int(it['src'].split('_')[-1].split('.')[0]) for it in prev]
+    next_new = max(used_idx or [0]) + 1
+    def _area(x):
+        return max(0, x.width) * max(0, x.height)
+    def _idx(it):
+        return int(it['src'].split('_')[-1].split('.')[0])
+    # 旧処理が残していた画像を、旧処理と同じ手順で再現する:
+    # 大きさの条件を満たす画像を (上, 左) の順に見て、すでに残したものと重ならない画像だけを残す。
+    # 残した順の番号 k が旧画像名 pNNN_k。新しいまとまりは旧画像を1つ以上必ず含むので、その名前を引き継ぐ
+    old_kept = []
+    for r in sorted(rects, key=lambda r: (r.y0, r.x0)):
+        if not any(m.intersects(r) for m in old_kept):
+            old_kept.append(fitz.Rect(r))
+    owner = {}
+    for oi, orc in enumerate(old_kept):
+        for gi, g in enumerate(merged):
+            if g.intersects(orc) or g.contains(orc):
+                owner.setdefault(gi, []).append({'src': 'img/p%03d_%d.jpg' % (pno + 1, oi + 1)})
+                break
+    if prev and len(prev) != len(old_kept):
+        print('注意: 旧画像の数が一致しません', pno + 1, len(prev), len(old_kept))
+    for gi, r0 in enumerate(merged):
+        if prev:
+            hits = sorted(owner.get(gi, []), key=_idx)
+            if hits:
+                k = _idx(hits[0])
+                for h in hits[1:]:
+                    RENAMES[h['src']] = hits[0]['src']
+            else:
+                k = next_new
+                next_new += 1
+                NEWIMGS.append('img/p%03d_%d.jpg' % (pno + 1, k))
+        else:
+            k = gi + 1
         r = fitz.Rect(r0)
         for _ in range(6):
             grown = fitz.Rect(r)
@@ -101,3 +158,6 @@ for pno in range(start - 1, end):
     with open(os.path.join(PAGES, 'p%03d.json' % (pno + 1)), 'w') as f:
         json.dump({'page': pno + 1, 'width': round(W), 'items': items}, f, ensure_ascii=False, indent=0)
 print('pages', end - start + 1, 'images', total_imgs)
+print('まとめた画像', RENAMES)
+print('新しい画像', NEWIMGS)
+json.dump({'renames': RENAMES, 'new': NEWIMGS}, open(os.path.join(ROOT, 'work', 'extract_changes.json'), 'w'), ensure_ascii=False, indent=1)
